@@ -1,23 +1,27 @@
-# Ex.No:4(C)  COMPOSITION IN JAVA
+# Ex.No:4(D) DESIGN PATTERN -- ABSTRACT FACTORY
 
 ## QUESTION:
-Implement a system where a Library contains multiple Book objects. Each Book is created inside the Library. Books can't exist independently (Composition).
+You’re creating a cross-platform UI tool using the Abstract Factory pattern. Implement factories to create Button and Checkbox for "dark" and "light" themes. Let the user choose the theme, then generate UI components and display their types
 
 ## AIM:
-To architect a tightly coupled Library–Book ecosystem where Book objects are fully lifecycle-dependent on the Library. This demonstrates Composition by ensuring books are instantiated, managed, and destroyed exclusively through the Library container.
+To implement the Abstract Factory design pattern in Java by creating theme-specific factories (Dark and Light) that produce UI components such as Button and Checkbox based on user-selected themes.
 
 ## ALGORITHM :
 1.	Start the program.
 2.	Import the necessary package 'java.util'
-3.	Instantiate the Library object that internally creates and retains Book instances.
-4.	Read user inputs for book details and populate the Library.
-5.	Trigger the Library’s display function to showcase all composed Book objects.
-6.	Terminate the program lifecycle.
+3.	Define interfaces Button and Checkbox with the render() method.
+4.	Create concrete classes for Dark and Light variants of Button and Checkbox.
+5.	Define a UIFactory interface with methods to create Button and Checkbox objects.
+6.	Implement DarkThemeFactory and LightThemeFactory to generate theme-specific components.
+7.	Read the theme choice from the user.
+8.	Instantiate the appropriate factory and create UI components.
+9.	Display the type of button and checkbox created.
+10.	End the program.
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Composition Concepts in Java
+Program to implement a Abstract Factory Pattern using Java
 Developed by: Atchaya V
 RegisterNumber: 212224060031
 */
@@ -26,62 +30,59 @@ RegisterNumber: 212224060031
 ## SOURCE CODE:
 
 ```java
-import java.util.*;
+import java.util.Scanner;
 
-class Book {
-    private String title;
-    private String author;
+interface Button { void render(); }
+interface Checkbox { void render(); }
 
-    public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
-
-    public String getDetails() {
-        return "- " + title + " by " + author;
-    }
+class DarkButton implements Button {
+    public void render() { System.out.println("Dark Button created"); }
+}
+class LightButton implements Button {
+    public void render() { System.out.println("Light Button created"); }
+}
+class DarkCheckbox implements Checkbox {
+    public void render() { System.out.println("Dark Checkbox created"); }
+}
+class LightCheckbox implements Checkbox {
+    public void render() { System.out.println("Light Checkbox created"); }
 }
 
-class Library {
-    private List<Book> books;
+interface UIFactory {
+    Button createButton();
+    Checkbox createCheckbox();
+}
 
-    public Library() {
-        books = new ArrayList<>();
-    }
+class DarkThemeFactory implements UIFactory {
+    public Button createButton() { return new DarkButton(); }
+    public Checkbox createCheckbox() { return new DarkCheckbox(); }
+}
 
-    public void addBook(String title, String author) {
-        books.add(new Book(title, author));
-    }
-
-    public void showBooks() {
-        System.out.println("Books in Library:");
-        for (Book b : books) {
-            System.out.println(b.getDetails());
-        }
-    }
+class LightThemeFactory implements UIFactory {
+    public Button createButton() { return new LightButton(); }
+    public Checkbox createCheckbox() { return new LightCheckbox(); }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = Integer.parseInt(sc.nextLine());
-        Library library = new Library();
-
-        for (int i = 0; i < n; i++) {
-            String title = sc.nextLine();
-            String author = sc.nextLine();
-            library.addBook(title, author);
+        Scanner scanner = new Scanner(System.in);
+        String theme = scanner.nextLine().toLowerCase();
+        UIFactory factory;
+        if (theme.equals("dark")) factory = new DarkThemeFactory();
+        else if (theme.equals("light")) factory = new LightThemeFactory();
+        else {
+            System.out.println("Invalid theme");
+            return;
         }
-
-        library.showBooks();
-        sc.close();
+        factory.createButton().render();
+        factory.createCheckbox().render();
     }
 }
 ```
 
 ## OUTPUT:
 
-<img width="703" height="428" alt="image" src="https://github.com/user-attachments/assets/061f969e-2e6c-4458-a579-c654e4a63ecb" />
+<img width="504" height="235" alt="image" src="https://github.com/user-attachments/assets/2577db6a-8795-4def-8eba-b242b58f4837" />
 
 ## RESULT:
 
