@@ -1,51 +1,73 @@
-# Ex.No:1(E) STRINGS AND MATH FUNCTION
+# Ex.No:1(D) ARRAYS
 
 ## QUESTION:
-Write a Java program to find the absolute value of a number using Math.abs().
+Write a Java program to print all elements in an array that are greater than a given value
+
 
 ## AIM:
-To write a Java program that finds the absolute value of a given number using the Math.abs() method.
+To write a Java program that prints all elements in an array greater than a given value.
 
 ## ALGORITHM :
-1.Start the program and create a Scanner object.
+1. Start the program and create a Scanner object.
+2. Read the size n and elements of the array.
+3. Read a value to compare with.
+4. Use a loop to check and print elements greater than the given value.
+5. End the program.
 
-2.Read a number n (can be integer or decimal) from the user.
 
-3.Use the built-in function Math.abs(n) to compute its absolute value.
-
-4.Display the calculated absolute value.
-
-5.End the program.
 
 
 ## PROGRAM:
- ```
-/*
-Program to implement a Strings and Math Function using Java
-Developed by: Atchaya V
-RegisterNumber: 212224060031
-*/
-```
 
+### Program to Implement Variables and Operators Using Java
 
-## SOURCE CODE:
-```
-import java.util.*;
-public class demo
-{
-    public static void main(String[] args)
-    {
-        Scanner sc=new Scanner(System.in);
-        double n=sc.nextDouble();
-        System.out.println("Absolute value = "+Math.abs(n));
+**Developed by:** Atchaya V
+
+**Register Number:** 212224060031
+### SOURCE CODE:
+```java
+import java.util.Scanner;
+
+public class ElementsGreaterThanX {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();     // size of array
+        int[] arr = new int[n];
+
+        for(int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();  // array elements
+        }
+
+        int x = scanner.nextInt();     // value to compare
+
+        boolean found = false;
+
+        for(int i = 0; i < n; i++) {
+            if(arr[i] > x) {
+                System.out.println(arr[i]);
+                found = true;
+            }
+        }
+
+        if(!found) {
+            System.out.println("No elements greater than " + x);
+        }
     }
 }
+
 ```
+
+
+
+
 
 
 ## OUTPUT:
-<img width="921" height="267" alt="image" src="https://github.com/user-attachments/assets/2057bca7-e3b5-47c0-ba0f-95b977864225" />
+<img width="1141" height="823" alt="image" src="https://github.com/user-attachments/assets/34a186f8-3e64-4b59-a0c6-c0fd2da49e52" />
+
 
 
 ## RESULT:
-Therefore the program successfully reads a number and calculates its absolute value.
+The program successfully prints all array elements greater than the given value.
